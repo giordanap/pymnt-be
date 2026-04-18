@@ -1,0 +1,13 @@
+name: node-candidate
+services:
+  api:
+    container_name: node-candidate-api
+    build: { context: . , dockerfile: apps/api/Dockerfile }
+    ports: ['3003:3000']
+  postgres:
+    container_name: node-candidate-db
+    image: postgres:15
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: supersecret
+      POSTGRES_DB: challenge_db
