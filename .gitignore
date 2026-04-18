@@ -1,5 +1,6 @@
 # dependencies
 node_modules/
+**/node_modules/
 .pnpm-store/
 
 # build outputs
@@ -8,6 +9,9 @@ dist/
 out/
 coverage/
 .turbo/
+
+# TypeScript incremental build info
+*.tsbuildinfo
 
 # env files
 .env
