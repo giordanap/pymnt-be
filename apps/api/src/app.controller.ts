@@ -2,7 +2,8 @@ import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
 @Controller()
 export class AppController {
-  private badService = new AppService();
+  constructor(private readonly appService: AppService) {}
+
   @Get('/users')
-  getUsers() { return this.badService.getUsers(); }
+  getUsers() { return this.appService.getUsers(); }
 }

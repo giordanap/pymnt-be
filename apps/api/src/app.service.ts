@@ -7,13 +7,18 @@ export class AppService {
 
   constructor() {
     this.pgClient = new Client({
-      user: 'admin',
-      password: 'supersecretpassword',
-      host: 'postgres',
-      database: 'challenge_db',
-      port: 5432,
+      user: process.env.DB_USER || 'admin',
+      password: process.env.DB_PASSWORD || 'supersecret',
+      host: process.env.DB_HOST || '127.0.0.1',
+      database: process.env.DB_NAME || 'challenge_db',
+      port: Number(process.env.DB_PORT || 55432),
     });
-    this.pgClient.connect();
+
+    this.pgClient.connect()
+      .then(() => console.log('Postgres connected successfully'))
+      .catch((error) => {
+        console.error('Postgres connection error:', error.message);
+      });
   }
 
   async getUsers() {
@@ -25,7 +30,7 @@ export class AppService {
   async processHeavyTask() {
     let sum = 0;
     for (let i = 0; i < 1e10; i++) {
-        sum += i;
+      sum += i;
     }
     return sum;
   }
