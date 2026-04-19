@@ -20,3 +20,33 @@ A pre-configured **PostgreSQL instance is provided** via Docker Compose. Do not 
 - **Core:** Node.js, NestJS (Modular)
 - **Database:** PostgreSQL, Prisma ORM
 - **Infrastructure:** Docker Compose, pnpm, Turborepo
+
+---
+
+## How to run
+
+### Prerequisites
+- [Docker](https://docs.docker.com/get-docker/) and Docker Compose
+
+### Steps
+
+```bash
+# 1. Copy the environment template and adjust values if needed
+cp .env.example .env
+
+# 2. Build the image and start all services
+docker compose up --build
+```
+
+The API will be available at **http://localhost:3001**.
+Prisma migrations are applied automatically on container start.
+
+To stop all services:
+```bash
+docker compose down
+```
+
+To reset the database volume:
+```bash
+docker compose down -v
+```
