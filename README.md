@@ -50,3 +50,13 @@ To reset the database volume:
 ```bash
 docker compose down -v
 ```
+
+### Seed data (optional)
+
+`apps/api/prisma/seed.sql` contains sample profile rows. Migrations run automatically on startup — the seed is **not** applied automatically so the `POST /profiles` endpoint can be exercised against an empty database.
+
+To load the seed manually after the containers are running:
+
+```bash
+docker exec -i node-candidate-db psql -U admin -d challenge_db < apps/api/prisma/seed.sql
+```
