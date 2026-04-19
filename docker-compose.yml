@@ -18,7 +18,7 @@ services:
       # Keep node_modules inside the container — prevents host directory from overwriting them
       - /app/node_modules
     # Apply pending migrations then start NestJS in watch mode.
-    command: sh -c "pnpm exec prisma migrate deploy --schema apps/api/prisma/schema.prisma && pnpm --filter api run dev"
+    command: sh -c "pnpm --filter api exec prisma migrate deploy --schema prisma/schema.prisma && pnpm --filter api run dev"
     depends_on:
       postgres:
         condition: service_healthy
