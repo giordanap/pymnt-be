@@ -12,6 +12,15 @@ services:
       # DATABASE_URL is assembled here so users never need to construct it manually.
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:3000}
+    volumes:
+      # Mount source so changes are reflected without rebuilding the image
+      - ./apps/api/src:/app/apps/api/src
+      # Keep node_modules inside the container — prevents host directory from overwriting them
+      - /app/node_modules
+    # Run in watch mode so NestJS recompiles on source changes
+    command: >
+      sh -c "pnpm exec prisma migrate deploy --schema apps/api/prisma/schema.prisma
+             && pnpm --filter api run dev"
     depends_on:
       postgres:
         condition: service_healthy
