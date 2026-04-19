@@ -1,5 +1,12 @@
-node_modules
-.turbo
-dist
-build
-.pnpm-store
+# Dependencies and build artifacts
+**/node_modules
+**/.turbo
+**/dist
+
+# Local environment secrets (never bake credentials into the image)
+.env
+apps/api/.env
+
+# Editor and OS noise
+**/.DS_Store
+**/Thumbs.db
